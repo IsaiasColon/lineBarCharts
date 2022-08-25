@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart</title>
+    <script src="js/chart.js"></script>
+</head>
+<body>
+    
+    <canvas id="NettoVM30Y" width="800" height="300"></canvas>
+
+<script>
+
+// Bar chart
+new Chart(document.getElementById("NettoVM30Y"), {
+  type: 'line',
+  data: {
+    labels: [2022,'','','',2027,'','','','',2032,'','','','',2037,'','','','',2042,'','','','',2047,'','','','',2052],
+    datasets: [{ 
+        data: [-37840, -28189, -14575, -320, 14590, 30167, 46425, 63375, 81030, 99405, 118511, 138361, 158969, 180347, 202508, 225466, 249235, 273827, 299256, 325535, 352678, 380697, 409605, 439414, 470137, 501786, 534372, 567907, 602400, 637863],
+        label: "Nettovermögen",
+        // backgroundColor: ['rgba(255, 99, 132, 0.2)'],,
+        backgroundColor: function(context) {
+            const index = context.dataIndex;
+            const value = context.dataset.data[index];
+            return value < 0 ? 'red' :  // draw negative values in red
+                // index % 2 ? 'blue' :    // else, alternate values in blue and green
+                'blue';
+        },
+        borderColor: ['rgba(255,99,132,1)'],
+        borderWidth: 1,
+        fill: {
+                target: 'origin',
+                above: 'blue',   // Area will be red above the origin
+                below: 'red'    // And blue below the origin
+              }
+      }]
+  },
+  
+  options: {
+    
+    title: {
+      display: false,
+    },
+    legend: {
+            display: false
+    },
+    scales: {
+            yAxes: [{
+                ticks: {
+                    // Include a euro sign in the ticks
+                    callback: function(value, index, values) {
+                        return '€' + value;
+                    }
+                }
+            }]
+    }
+    
+  }
+});
+</script>
+
+</body>
+</html>
