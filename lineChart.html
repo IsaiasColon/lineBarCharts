@@ -47,15 +47,26 @@ new Chart(document.getElementById("NettoVM30Y"), {
     legend: {
             display: false
     },
+    // scales: {
+    //         yAxes: [{
+    //             ticks: {
+    //                 // Include a euro sign in the ticks
+    //                 callback: function(value, index, values) {
+    //                     return '€' + value;
+    //                 }
+    //             }
+    //         }]
+    // }
     scales: {
-            yAxes: [{
-                ticks: {
-                    // Include a euro sign in the ticks
-                    callback: function(value, index, values) {
-                        return '€' + value;
-                    }
-                }
-            }]
+      y: {
+        ticks: {
+          // Include a euro sign in the ticks
+          callback: function(value, index, values) {
+            let valor = value.toString();
+            return '€' + valor.replace("00000", "00.000");
+          }
+        }
+      }
     }
     
   }
